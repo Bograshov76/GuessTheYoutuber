@@ -1,18 +1,30 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import ChangingImage from './changing_image';
+import LevelsList from './levels_list';
 
 export default class Welcome extends React.Component {
-  startGame() {
+  constructor() {
+    super();
+    this.state = {};
+    this.state.startButtonPressed = false;
+  }
 
+
+  startGame() {
+    this.setState({'startButtonPressed':true});
   }
 
   render() {
+    if (this.state.startButtonPressed === true) {
+      return <LevelsList />;
+    }
+
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Guess the YouTuber</Text>
         <View style={styles.changingImage}>
-          <ChangingImage images={[
+          <ChangingImage ref="myRef" images={[
             'https://yt3.ggpht.com/-rJq9gk1QIis/AAAAAAAAAAI/AAAAAAAAAAA/Kx4wkvKOfxY/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg',
             'https://yt3.ggpht.com/-6Sj6Quz5Njs/AAAAAAAAAAI/AAAAAAAAAAA/cRlUOiAQDnA/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg',
             'https://yt3.ggpht.com/-aSj-EnOjUkc/AAAAAAAAAAI/AAAAAAAAAAA/lQiWTDY9Sd0/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg',
@@ -22,7 +34,7 @@ export default class Welcome extends React.Component {
             'https://yt3.ggpht.com/-Hp2Y60tsv-E/AAAAAAAAAAI/AAAAAAAAAAA/8KsUrd_C2p0/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg']}/>
         </View>
         <Button
-          onPress={this.startGame}
+          onPress={this.startGame.bind(this)}
           title="Start"
           color="#ee0f0f"
           accessibilityLabel="Start the game!"

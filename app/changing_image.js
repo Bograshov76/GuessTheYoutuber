@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 
 export default class ChangingImage extends React.Component {
 
@@ -20,16 +20,18 @@ export default class ChangingImage extends React.Component {
     }, 1000);
   }
 
-  asfsdfsdfsfss() {
+  aw12() {
 
   }
 
   render() {
     return (
-      <Image style={{ flex:1, alignSelf: 'stretch', height: undefined, width: undefined }}
-             source={{uri: this.props.images[this.state.currentIndex]}}
-             resizeMode="contain"
-      />
+      <View style={{ flex: 1 }}>
+        <Image style={{ alignSelf: "center", height: 200, width: 200, borderRadius: 100 }}
+               source={{uri: this.props.images[this.state.currentIndex]}}
+               resizeMode="cover"
+        />
+      </View>
     );
   }
 }

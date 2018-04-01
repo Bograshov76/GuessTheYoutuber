@@ -1,13 +1,25 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import ChangingImage from './changing_image';
+import LevelsList from './levels_list';
 
 export default class Welcome extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+    this.state.startButtonPressed = false;
+  }
+
+
   startGame() {
-    asdsdss
+    this.setState({'startButtonPressed':true});
   }
 
   render() {
+    if (this.state.startButtonPressed === true) {
+      return <LevelsList />;
+    }
+
     return (
       <View style={{flex:1, justifyContent: "center", alignItems: "stretch"}}>
         <View style={{ flex: 3 }}>

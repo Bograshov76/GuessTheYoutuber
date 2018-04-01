@@ -19,7 +19,6 @@ export default class App extends React.Component {
       franklin_gothic_demi_cond_regular: require('./assets/fonts/Franklin-Gothic-Demi-Cond-Regular.ttf'),
     });
     this.setState({ loaded: true });
-    asdsasdsasds
   };
 
   render() {

@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import LevelTitle from './level_title';
 import Level from './level';
-import { Container, Content, Card, CardItem, Body, Header } from 'native-base';
-
 
 export default class LevelsList extends React.Component {
   constructor() {
@@ -42,7 +40,6 @@ export default class LevelsList extends React.Component {
     return fetch('http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/levels')
       .then((response) => response.json())
       .then((responseJson) => {
-
         this.setState({
           isLoading: false,
           levels: responseJson.levels,
@@ -63,8 +60,8 @@ export default class LevelsList extends React.Component {
       return <Level levelObj={this.state.levelObj} />;
     }
     return (
-        <View>
-          {this.state.levels.map(level => <LevelTitle key={level.id } id={level.id} name={level.name} pickLevel={this.pickLevel.bind(this)}></LevelTitle>)}
+        <View style={{flex: 1}}>
+          {this.state.levels.map(level => <LevelTitle key={level.id} id={level.id} name={level.name} pickLevel={this.pickLevel.bind(this)}></LevelTitle>)}
         </View>
     );
   }

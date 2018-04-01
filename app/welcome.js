@@ -37,7 +37,7 @@ export default class Welcome extends React.Component {
         </View>
         <View style={{ flex: 1 }}>
           <Button
-            onPress={this.startGame}
+            onPress={this.startGame.bind(this)}
             title="Start"
             color="#ee0f0f"
             accessibilityLabel="Start the game!"

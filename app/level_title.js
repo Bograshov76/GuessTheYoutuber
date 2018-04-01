@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, Alert, Text, Button } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Header } from 'native-base';
 
 export default class LevelTitle extends React.Component {
@@ -34,10 +34,6 @@ export default class LevelTitle extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  box: {
-    flex: 1,
-    flexDirection: 'row'
-  },
   btn: {
     flex: 1
   }

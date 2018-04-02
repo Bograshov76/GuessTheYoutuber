@@ -6,7 +6,9 @@ export default class Level extends React.Component {
   render() {
     return (
         <View>
-          {this.props.levelObj.contents.map(content => <Text key={content.id}>{'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + content.image_path}</Text>)}
+          {this.props.levelObj.contents.map(content => 
+            <Image key={content.id} source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + content.image_path}} style={{width: 40, height: 40}}/>
+          )}
         </View>
     );
   }

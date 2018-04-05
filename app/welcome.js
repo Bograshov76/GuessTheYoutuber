@@ -12,7 +12,7 @@ export default class Welcome extends React.Component {
 
 
   startGame() {
-    this.setState({'startButtonPressed':true});
+    this.props.navigator.push('levels_list');
   }
 
   render() {

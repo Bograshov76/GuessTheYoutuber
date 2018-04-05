@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Alert, Text, Button } from 'react-native';
+import { StyleSheet, Alert, Text, Button, TouchableHighlight } from 'react-native';
 import { Container, Content, Card, CardItem, Body, Header } from 'native-base';
 
 export default class LevelTitle extends React.Component {
@@ -9,7 +9,8 @@ export default class LevelTitle extends React.Component {
 
   render() {
     return (
-      <Card style={{height: 100, width: 190}}>
+      <TouchableHighlight onPress={this.pickLevel.bind(this, this.props.id)} style={{height: 100, width: 190}}>
+      <Card>
         <CardItem>
           <Body>
             <Text>
@@ -17,18 +18,8 @@ export default class LevelTitle extends React.Component {
             </Text>
           </Body>
         </CardItem>
-        <CardItem>
-          <Body>
-            <Button
-              onPress={this.pickLevel.bind(this, this.props.id)}
-              title="Start Level"
-              color="#ee0f0f"
-              accessibilityLabel="Start the level!"
-              style={styles.btn}
-            />
-          </Body>
-        </CardItem>
       </Card>
+      </TouchableHighlight>
     );
   }
 }

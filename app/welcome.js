@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   miniHeader: {
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
-    fontFamily: 'franklin_gothic_demi_cond_regular'
+    fontFamily: 'KBSticktoIt'
   },
   header: {
-    fontSize: 35,
+    fontSize: 40,
     textAlign: 'center',
-    fontFamily: 'franklin_gothic_demi_cond_regular'
+    fontFamily: 'KBSticktoIt'
   },
   changingImage: {
     padding: 10,

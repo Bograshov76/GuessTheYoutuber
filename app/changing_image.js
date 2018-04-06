@@ -19,7 +19,7 @@ export default class ChangingImage extends React.Component {
           return { currentIndex: index };
         });
       }
-    }, 1000);
+    }, 700);
   }
 
   componentDidMount() {
@@ -30,13 +30,10 @@ export default class ChangingImage extends React.Component {
       this._isMounted = false;
   }
 
-  asfsdfsdfsfss() {
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Image style={{ alignSelf: "center", height: 200, width: 200, borderRadius: 100 }}
+        <Image style={{ alignSelf: "center", height: 150, width: 150, borderRadius: 100 }}
                source={{uri: this.props.images[this.state.currentIndex]}}
                resizeMode="cover"
         />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
 import ChangingImage from './changing_image';
 import LevelsList from './levels_list';
 
@@ -9,7 +9,6 @@ export default class Welcome extends React.Component {
     this.state = {};
     this.state.startButtonPressed = false;
   }
-
 
   startGame() {
     this.setState({'startButtonPressed':true});
@@ -22,6 +21,8 @@ export default class Welcome extends React.Component {
 
     return (
       <View style={{flex:1, justifyContent: "center", alignItems: "stretch"}}>
+        <View style={{ flex: 1 }}>
+        </View>
         <View style={{ flex: 3 }}>
           <ChangingImage style={styles.changingImage} images={[
             'https://yt3.ggpht.com/-rJq9gk1QIis/AAAAAAAAAAI/AAAAAAAAAAA/Kx4wkvKOfxY/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg',
@@ -31,18 +32,26 @@ export default class Welcome extends React.Component {
             'https://yt3.ggpht.com/-evPUF7Pz8G0/AAAAAAAAAAI/AAAAAAAAAAA/GBAOe_Smwkc/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg',
             'https://yt3.ggpht.com/-M0_lRsNbwbA/AAAAAAAAAAI/AAAAAAAAAAA/1rCKpaxGY7E/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg',
             'https://yt3.ggpht.com/-Hp2Y60tsv-E/AAAAAAAAAAI/AAAAAAAAAAA/8KsUrd_C2p0/s288-mo-c-c0xffffffff-rj-k-no/photo.jpg']}/>
+          <Text style={styles.miniHeader}>GUESS THE</Text>
+          <Text style={styles.header}>YouTuber</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={styles.header}>Guess the YouTuber</Text>
         </View>
-        <View style={{ flex: 1 }}>
-          <Button
-            onPress={this.startGame.bind(this)}
-            title="Start"
-            color="#ee0f0f"
-            accessibilityLabel="Start the game!"
-            style={styles.btn}
-          />
+        <View style={{ flex: 2, justifyContent: "flex-start" }}>
+          <TouchableOpacity onPress={this.startGame.bind(this)} style={styles.btn}>
+            <Button
+              title="Start"
+              color="#ee0f0f"
+              accessibilityLabel="Start the game!"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.startGame.bind(this)} style={styles.btn}>
+            <Button
+              title="Settings"
+              color="#c0c2ce"
+              accessibilityLabel="Manage the game settings"
+            />
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -55,18 +64,22 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
+  miniHeader: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: 'franklin_gothic_demi_cond_regular'
+  },
   header: {
     fontSize: 35,
     textAlign: 'center',
-    fontFamily: 'franklin_gothic_demi_cond_regular',
-    marginTop: 30,
-    marginBottom: 30
+    fontFamily: 'franklin_gothic_demi_cond_regular'
   },
   changingImage: {
     padding: 10,
     justifyContent: 'center'
   },
   btn: {
-    alignSelf: "stretch"
+    alignSelf: "stretch",
+    padding: 10
   }
 });

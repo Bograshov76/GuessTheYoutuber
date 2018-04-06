@@ -61,7 +61,9 @@ export default class LevelsList extends React.Component {
     }
     return (
         <View style={{flex: 1}}>
-          {this.state.levels.map(level => <LevelTitle key={level.id} id={level.id} name={level.name} pickLevel={this.pickLevel.bind(this)}></LevelTitle>)}
+          {this.state.levels.map(level => 
+            <LevelTitle key={level.id} id={level.id} name={level.name} pickLevel={this.pickLevel.bind(this)}></LevelTitle>
+          )}
         </View>
     );
   }

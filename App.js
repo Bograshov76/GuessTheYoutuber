@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, AppRegistry, Text} from 'react-native';
+import { View, AppRegistry, Image } from 'react-native';
 import { Font, AppLoading } from 'expo';
 import { Container, Card, CardItem, Body } from 'native-base';
 import Welcome from './app/welcome';
 import LevelsList from './app/levels_list';
+import BackgroundImage from './app/background_image';
 
 import {
   createRouter,
@@ -30,6 +31,9 @@ export default class App extends React.Component {
   _loadAssetsAsync = async () => {
     await Font.loadAsync({
       franklin_gothic_demi_cond_regular: require('./assets/fonts/Franklin-Gothic-Demi-Cond-Regular.ttf'),
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
     this.setState({ loaded: true });
   };
@@ -63,12 +67,14 @@ class HomeScreen extends React.Component {
       <View style={{ flex: 1, backgroundColor: '#ff0000' }}>
         <Container style={{ padding: 20, flex: 1, justifyContent: "center", alignItems: "stretch"}}>
           <View style={{flex: 1, justifyContent: "center", alignItems: "stretch"}}>
-            <Card style={{flex: 1, justifyContent: "center", alignItems: "stretch"}}>
-              <CardItem style={{ flex: 1, justifyContent: "center", alignItems: "stretch" }}>
-                <Body style={{ flex: 1, justifyContent: "center", alignItems: "stretch" }}>
-                  <Welcome navigator={this.props.navigator} style={{ flex: 1, justifyContent: "center", alignItems: "stretch"}} />
-                </Body>
-              </CardItem>
+            <Card>
+              <BackgroundImage>
+                <CardItem style={{ flex: 1, backgroundColor:'transparent' }}>
+                    <Body style={{ flex: 1, justifyContent: "center", alignItems: "stretch" }}>
+                      <Welcome navigator={this.props.navigator} style={{ flex: 1, justifyContent: "center", alignItems: "stretch"}} />
+                    </Body>
+                </CardItem>
+              </BackgroundImage>
             </Card>
           </View>
         </Container>

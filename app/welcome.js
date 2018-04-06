@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text } from 'native-base';
 import ChangingImage from './changing_image';
 import LevelsList from './levels_list';
 
@@ -38,20 +39,12 @@ export default class Welcome extends React.Component {
         <View style={{ flex: 1 }}>
         </View>
         <View style={{ flex: 2, justifyContent: "flex-start" }}>
-          <TouchableOpacity onPress={this.startGame.bind(this)} style={styles.btn}>
-            <Button
-              title="Start"
-              color="#ee0f0f"
-              accessibilityLabel="Start the game!"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.startGame.bind(this)} style={styles.btn}>
-            <Button
-              title="Settings"
-              color="#c0c2ce"
-              accessibilityLabel="Manage the game settings"
-            />
-          </TouchableOpacity>
+          <Button rounded success onPress={this.startGame.bind(this)} style={styles.btn}>
+            <Text>Start</Text>
+          </Button>
+          <Button rounded light onPress={this.startGame.bind(this)} style={styles.btn}>
+            <Text>Settings</Text>
+          </Button>
         </View>
       </View>
     );
@@ -80,6 +73,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     alignSelf: "stretch",
-    padding: 10
+    justifyContent: "center",
+    marginBottom: 20,
   }
 });

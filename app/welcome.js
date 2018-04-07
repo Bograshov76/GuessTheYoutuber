@@ -8,7 +8,6 @@ export default class Welcome extends React.Component {
   constructor() {
     super();
     this.state = {};
-    this.state.startButtonPressed = false;
   }
 
   startGame() {
@@ -16,10 +15,6 @@ export default class Welcome extends React.Component {
   }
 
   render() {
-    if (this.state.startButtonPressed === true) {
-      return <LevelsList />;
-    }
-
     return (
       <View style={{flex:1, justifyContent: "center", alignItems: "stretch"}}>
         <View style={{ flex: 1 }}>

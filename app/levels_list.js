@@ -6,7 +6,7 @@ import Level from './level';
 export default class LevelsList extends React.Component {
   constructor() {
     super();
-    this.state = {isLoading: true, levels: [], levelSelected: false, levelObj: null}
+    this.state = {isLoading: true, levels: []}
   }
 
   pickLevel(id) {
@@ -20,14 +20,7 @@ export default class LevelsList extends React.Component {
       .then((response) => response.json())
       .then((responseJson) => {
 
-        this.setState({
-          isLoading: false,
-          levels: this.state.levels,
-          levelSelected: true,
-          levelObj: responseJson
-        }, function(){
-
-        });
+        this.props.navigator.push('level', {levelObj: responseJson});
 
       })
       .catch((error) =>{
@@ -42,9 +35,7 @@ export default class LevelsList extends React.Component {
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          levels: responseJson.levels,
-          levelSelected: false,
-          levelObj: null
+          levels: responseJson.levels
         }, function(){
 
         });
@@ -56,9 +47,6 @@ export default class LevelsList extends React.Component {
   }
 
   render() {
-    if (this.state.levelObj) {
-      return <Level levelObj={this.state.levelObj} />;
-    }
     return (
         <View style={{flex: 1}}>
           {this.state.levels.map(level => 

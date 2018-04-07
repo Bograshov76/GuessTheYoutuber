@@ -4,6 +4,8 @@ import { Font, AppLoading } from 'expo';
 import { Container, Card, CardItem, Body } from 'native-base';
 import Welcome from './app/welcome';
 import LevelsList from './app/levels_list';
+import Level from './app/level';
+import Guess from './app/guess';
 import BackgroundImage from './app/background_image';
 
 import {
@@ -15,7 +17,9 @@ import {
 const Router = createRouter(() => ({
   home: () => HomeScreen,
   welcome: () => Welcome,
-  levels_list: () => LevelsList
+  levels_list: () => LevelsList,
+  level: () => Level,
+  guess: () => Guess
 }));
 
 export default class App extends React.Component {

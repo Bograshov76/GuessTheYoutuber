@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import LevelTitle from './level_title';
+import { StyleSheet, ScrollView, Dimensions, View } from 'react-native';
+import { List, ListItem, Button, Text, Icon } from 'native-base';
+import BgCard from './bg_card';
 import Level from './level';
 
 export default class LevelsList extends React.Component {
@@ -60,18 +61,26 @@ export default class LevelsList extends React.Component {
       return <Level levelObj={this.state.levelObj} />;
     }
     return (
-        <View style={{flex: 1}}>
-          {this.state.levels.map(level => 
-            <LevelTitle key={level.id} id={level.id} name={level.name} pickLevel={this.pickLevel.bind(this)}></LevelTitle>
-          )}
-        </View>
+        <BgCard>
+          <View>
+            <ScrollView contentContainerStyle={{ flex: 0 }}>
+              {this.state.levels.map(level =>
+                <Button key={level.id} iconLeft rounded success style={styles.btn}>
+                  <Icon name='star' />
+                  <Text>{level.name}</Text>
+                </Button>
+              )}
+            </ScrollView>
+          </View>
+        </BgCard>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  box: {
+  btn: {
+    justifyContent: "center",
     flex: 1,
-    flexDirection: 'row'
+    marginBottom: 10
   }
 });

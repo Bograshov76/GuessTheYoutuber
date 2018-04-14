@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import LevelTitle from './level_title';
-import Level from './level';
+import { StyleSheet, ScrollView, View } from 'react-native';
+import { Button, Text, Icon } from 'native-base';
+import BgCard from './bg_card';
 
 export default class LevelsList extends React.Component {
   constructor() {
@@ -19,9 +19,7 @@ export default class LevelsList extends React.Component {
     return fetch(url)
       .then((response) => response.json())
       .then((responseJson) => {
-
         this.props.navigator.push('level', {levelObj: responseJson});
-
       })
       .catch((error) =>{
         console.error(error);
@@ -48,18 +46,27 @@ export default class LevelsList extends React.Component {
 
   render() {
     return (
-        <View style={{flex: 1}}>
-          {this.state.levels.map(level => 
-            <LevelTitle key={level.id} id={level.id} name={level.name} pickLevel={this.pickLevel.bind(this)}></LevelTitle>
-          )}
-        </View>
+        <BgCard>
+          <View>
+            <ScrollView contentContainerStyle={{ flex: 0 }}>
+              {this.state.levels.map(level =>
+                <Button key={level.id} iconLeft rounded success style={styles.btn}
+                        onPress={() => this.pickLevel(level.id)}>
+                  <Icon name='star' />
+                  <Text>{level.name}</Text>
+                </Button>
+              )}
+            </ScrollView>
+          </View>
+        </BgCard>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  box: {
+  btn: {
+    justifyContent: "center",
     flex: 1,
-    flexDirection: 'row'
+    marginBottom: 10
   }
 });

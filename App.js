@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, AppRegistry } from 'react-native';
+import { AppRegistry } from 'react-native';
 import { Font, AppLoading } from 'expo';
 import Welcome from './app/welcome';
 import LevelsList from './app/levels_list';
+import Level from './app/level';
+import Guess from './app/guess';
 import BgCard from './app/bg_card';
 
 import {

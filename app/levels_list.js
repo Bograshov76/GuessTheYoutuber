@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, ScrollView, Dimensions, View } from 'react-native';
-import { List, ListItem, Button, Text, Icon } from 'native-base';
+import { StyleSheet, ScrollView, View } from 'react-native';
+import { Button, Text, Icon } from 'native-base';
 import BgCard from './bg_card';
-import Level from './level';
 
 export default class LevelsList extends React.Component {
   constructor() {
@@ -20,9 +19,7 @@ export default class LevelsList extends React.Component {
     return fetch(url)
       .then((response) => response.json())
       .then((responseJson) => {
-
         this.props.navigator.push('level', {levelObj: responseJson});
-
       })
       .catch((error) =>{
         console.error(error);
@@ -53,7 +50,8 @@ export default class LevelsList extends React.Component {
           <View>
             <ScrollView contentContainerStyle={{ flex: 0 }}>
               {this.state.levels.map(level =>
-                <Button key={level.id} iconLeft rounded success style={styles.btn}>
+                <Button key={level.id} iconLeft rounded success style={styles.btn}
+                        onPress={() => this.pickLevel(level.id)}>
                   <Icon name='star' />
                   <Text>{level.name}</Text>
                 </Button>

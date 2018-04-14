@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'native-base';
 import ChangingImage from './changing_image';
-import LevelsList from './levels_list';
 
 export default class Welcome extends React.Component {
   constructor() {
@@ -47,11 +46,6 @@ export default class Welcome extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  welcomeContainer: {
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
   miniHeader: {
     fontSize: 25,
     textAlign: 'center',

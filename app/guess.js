@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import BgCard from './bg_card';
 import Letter from './letter';
 import AnswerLetter from './answer_letter';
 import _ from 'lodash';
@@ -79,23 +80,25 @@ export default class Guess extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.props.route.params.guessObj.answer}</Text>
-        <Image
-          style={{width: 50, height: 50}}
-          source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + this.props.route.params.guessObj.image_path}}
-        />
-        <View style={styles.answer}>
-          {this.state.answerLetters.map(obj => 
-            <AnswerLetter value={obj.value} key={obj.key} id={obj.key} letterKey={obj.letterKey} letterPressed={this.answerLetterPressed.bind(this)}></AnswerLetter>
-          )}
+      <BgCard>
+        <View>
+          <Text>{this.props.route.params.guessObj.answer}</Text>
+          <Image
+            style={{width: 50, height: 50}}
+            source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + this.props.route.params.guessObj.image_path}}
+          />
+          <View style={styles.answer}>
+            {this.state.answerLetters.map(obj =>
+              <AnswerLetter value={obj.value} key={obj.key} id={obj.key} letterKey={obj.letterKey} letterPressed={this.answerLetterPressed.bind(this)}></AnswerLetter>
+            )}
+          </View>
+          <View style={styles.letters}>
+            {this.state.letters.map(obj =>
+              <Letter value={obj.value} key={obj.key} id={obj.key} letterPressed={this.letterPressed.bind(this)}></Letter>
+            )}
+          </View>
         </View>
-        <View style={styles.letters}>
-          {this.state.letters.map(obj => 
-            <Letter value={obj.value} key={obj.key} id={obj.key} letterPressed={this.letterPressed.bind(this)}></Letter>
-          )}
-        </View>
-      </View>
+      </BgCard>
     );
   }
 }

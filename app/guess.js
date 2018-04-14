@@ -5,6 +5,7 @@ import Letter from './letter';
 import AnswerLetter from './answer_letter';
 import {GetFromStorage, SetToStorage, EditStorage} from '../lib/storageHandler'
 import _ from 'lodash';
+import { AddCoins } from '../lib/coins'
 
 export default class Guess extends React.Component {
   constructor(props) {
@@ -76,6 +77,7 @@ export default class Guess extends React.Component {
     var key = 'guess:' + this.props.route.params.guessObj.id.toString();
 
     EditStorage(key, {state: guessState});
+    AddCoins(10);
   }
 
   answerLetterPressed(key, value, letterKey) {

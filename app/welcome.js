@@ -8,7 +8,6 @@ export default class Welcome extends React.Component {
   constructor() {
     super();
     this.state = {};
-    this.state.startButtonPressed = false;
   }
 
   startGame() {

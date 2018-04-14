@@ -5,26 +5,15 @@ import Guess from './guess';
 import _ from 'lodash'
 
 export default class Level extends React.Component {
-  constructor() {
-    super();
-    this.state = {guessObj: null}
-  }
-
   imagePicked(id) {
-    var guessObj = _.find(this.props.levelObj.contents, {'id': id});
-    this.setState({
-      guessObj: guessObj
-    });
+    var guessObj = _.find(this.props.route.params.levelObj.contents, {'id': id});
+    this.props.navigator.push('guess', {guessObj: guessObj});
   }
 
   render() {
-    if (this.state.guessObj) {
-      return <Guess />
-    }
-
     return (
         <View style={styles.imagesView}>
-          {this.props.levelObj.contents.map(content => 
+          {this.props.route.params.levelObj.contents.map(content => 
             <TouchableHighlight key={content.id} onPress={this.imagePicked.bind(this, content.id)}>
               <Image style={styles.img} 
                 source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + content.image_path}}

@@ -14,7 +14,9 @@ import {
 const Router = createRouter(() => ({
   home: () => HomeScreen,
   welcome: () => Welcome,
-  levels_list: () => LevelsList
+  levels_list: () => LevelsList,
+  level: () => Level,
+  guess: () => Guess
 }));
 
 export default class App extends React.Component {

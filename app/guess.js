@@ -1,17 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { Alert, StyleSheet, Text, View, Image } from 'react-native';
 import Letter from './letter';
 import AnswerLetter from './answer_letter';
+import {GetFromStorage, SetToStorage, EditStorage} from '../lib/storageHandler'
 import _ from 'lodash';
 
 export default class Guess extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      letters: [],
+      answerLetters: []
+    }
+  }
+
+  async componentDidMount() {
+    var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+    var storageGuess = await GetFromStorage(key);
+    if (storageGuess) {
+      this.setState(storageGuess.state);
+      return;
+    }
     var letters = [];
     var answerLetters = [];
-    for (var i = 0; i < props.route.params.guessObj.answer.length; i++) {
+    for (var i = 0; i < this.props.route.params.guessObj.answer.length; i++) {
       letters.push({
-        value: props.route.params.guessObj.answer[i],
+        value: this.props.route.params.guessObj.answer[i],
         key: i.toString(),
         selected: false
       });
@@ -23,10 +37,14 @@ export default class Guess extends React.Component {
       });
     }
 
-    this.state = {
+    var guessState = {
       letters: letters,
       answerLetters: answerLetters
     }
+
+    this.setState(guessState);
+
+    SetToStorage(key, _.assign(this.props.route.params.guessObj, {state: guessState}));
   }
 
   letterPressed(key, value) {
@@ -48,10 +66,15 @@ export default class Guess extends React.Component {
       }
     }
 
-    this.setState({
+    guessState = {
       letters: this.state.letters,
       answerLetters: this.state.answerLetters
-    });
+    };
+
+    this.setState(guessState);
+    var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+
+    EditStorage(key, {state: guessState});
   }
 
   answerLetterPressed(key, value, letterKey) {
@@ -71,10 +94,15 @@ export default class Guess extends React.Component {
       }
     }
 
-    this.setState({
+    guessState = {
       letters: this.state.letters,
       answerLetters: this.state.answerLetters
-    });
+    };
+
+    this.setState(guessState);
+    var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+
+    EditStorage(key, {state: guessState});
   }
 
   render() {

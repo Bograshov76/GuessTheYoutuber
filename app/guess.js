@@ -49,6 +49,19 @@ export default class Guess extends React.Component {
     SetToStorage(key, _.assign(this.props.route.params.guessObj, {state: guessState}));
   }
 
+  verifyGuess() {
+    var answerLetters = '';
+    for (var i = 0; i < this.state.answerLetters.length; i++) {
+      if (!this.state.answerLetters[i].valueSet) {
+        return false;
+      }
+
+      answerLetters += this.state.answerLetters[i].value;
+    }
+
+    return answerLetters == this.props.route.params.guessObj.answer;
+  }
+
   letterPressed(key, value) {
     for (var i = 0; i < this.state.answerLetters.length; i++) {
       if (!this.state.answerLetters[i].valueSet) {
@@ -75,9 +88,21 @@ export default class Guess extends React.Component {
 
     this.setState(guessState);
     var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+    var guessFinished = this.verifyGuess();
 
-    EditStorage(key, {state: guessState});
-    AddCoins(10);
+    EditStorage(key, {state: guessState, finished: guessFinished});
+
+    if (guessFinished) {
+      AddCoins(10);
+      Alert.alert(
+        'OMG',
+        'Level Finished',
+        [
+          {text: 'OK', onPress: () => this.props.navigator.pop()}
+        ]
+      )
+      
+    }
   }
 
   answerLetterPressed(key, value, letterKey) {

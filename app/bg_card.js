@@ -3,7 +3,8 @@ import { View } from 'react-native';
 import { Container, Footer, FooterTab, Button, Text, Badge } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackgroundImage from './background_image';
-import { GetCoins, SubscribeToEvent, UnSubscribeFromEvent } from '../lib/coins'
+import { GetCoins } from '../lib/coins';
+import { SubscribeToEvent, UnSubscribeFromEvent } from '../lib/events';
 
 export default class BgCard extends React.Component {
   async coinsChanged() {

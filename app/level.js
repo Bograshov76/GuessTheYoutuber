@@ -32,7 +32,7 @@ export default class Level extends React.Component {
 
   render() {
     return (
-      <BgCard>
+      <BgCard navigator={this.props.navigator}>
         <View style={{flex: 1}}>
           <ScrollView contentContainerStyle={{ flex: 0 }}>
             <Grid>

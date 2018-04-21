@@ -46,7 +46,7 @@ export default class LevelsList extends React.Component {
 
   render() {
     return (
-        <BgCard>
+        <BgCard navigator={this.props.navigator}>
           <View>
             <ScrollView contentContainerStyle={{ flex: 0 }}>
               {this.state.levels.map(level =>

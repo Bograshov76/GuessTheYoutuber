@@ -68,7 +68,7 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <BgCard>
+      <BgCard navigator={this.props.navigator}>
         <Welcome navigator={this.props.navigator} style={{ flex: 1, justifyContent: "center", alignItems: "stretch"}} />
       </BgCard>
     )

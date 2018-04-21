@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { Container, Card, CardItem, Body } from 'native-base';
+import { View } from 'react-native';
+import { Container, Footer, FooterTab, Button, Text, Badge } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import BackgroundImage from './background_image';
 import { GetCoins, SubscribeToEvent, UnSubscribeFromEvent } from '../lib/coins'
-import _ from 'lodash';
 
 export default class BgCard extends React.Component {
   async coinsChanged() {
@@ -26,26 +26,36 @@ export default class BgCard extends React.Component {
     UnSubscribeFromEvent('change');
   }
 
+  navigateTo(screen) {
+    this.props.navigator.push(screen);
+  }
+
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#ff0000' }}>
-        <Container style={{ padding: 20, flex: 1, justifyContent: "center", alignItems: "stretch"}}>
+      <View style={{ flex: 1 }}>
+        <Container style={{ flex: 1, justifyContent: "center", alignItems: "stretch"}}>
           <View style={{flex: 1, justifyContent: "center", alignItems: "stretch"}}>
-            <Card>
               <BackgroundImage style={{flex: 1}}>
-                <CardItem style={{ backgroundColor: 'transparent', alignSelf: 'flex-start'}}>
-                    <Body style={{ flex: 1, alignItems: 'flex-end', flexDirection: 'row'}}>
-                       <Image source={require('../assets/img/coins.png')} />
-                        <Text>{this.state.coins}</Text>
-                    </Body>
-                </CardItem>
-                <CardItem style={{ flex: 1, backgroundColor:'transparent' }}>
-                  <Body style={{ flex: 1, justifyContent: "center", alignItems: "stretch" }}>
+                <View style={{ flex: 9, backgroundColor: 'transparent' }}>
+                  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'stretch', padding: 20 }}>
                     {this.props.children}
-                  </Body>
-                </CardItem>
+                  </View>
+                </View>
+                <Footer>
+                  <FooterTab style={{ backgroundColor: '#fafafa' }}>
+                    <Button vertical onPress={() => this.navigateTo('home')}>
+                      <Icon name="home" size={30} />
+                    </Button>
+                    <Button vertical onPress={() => this.navigateTo('levels_list')}>
+                      <Icon name="bars" size={30} color={this.props.navigator[0] === 'levels_list' ? '#e6172e' : undefined} />
+                    </Button>
+                    <Button badge vertical>
+                      <Badge success style={{ top: 6, left: 13 }}><Text>{this.state.coins}</Text></Badge>
+                      <Icon name="money" size={30} style={{ top: -7.7 }} />
+                    </Button>
+                  </FooterTab>
+                </Footer>
               </BackgroundImage>
-            </Card>
           </View>
         </Container>
       </View>

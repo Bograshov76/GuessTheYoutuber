@@ -135,7 +135,7 @@ export default class Guess extends React.Component {
 
   render() {
     return (
-      <BgCard>
+      <BgCard navigator={this.props.navigator}>
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <View style={{ flex: 1, justifyContent: 'center'  }}>
             <Text style={styles.miniHeader}>take a guess</Text>

@@ -5,6 +5,7 @@ import Letter from './letter';
 import AnswerLetter from './answer_letter';
 import {GetFromStorage, SetToStorage, EditStorage} from '../lib/storageHandler'
 import _ from 'lodash';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 export default class Guess extends React.Component {
   constructor(props) {
@@ -109,20 +110,29 @@ export default class Guess extends React.Component {
   render() {
     return (
       <BgCard>
-        <View>
-          <Text>{this.props.route.params.guessObj.answer}</Text>
-          <Image
-            style={{width: 50, height: 50}}
-            source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + this.props.route.params.guessObj.image_path}}
-          />
-          <View style={styles.answer}>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View style={{ flex: 1, justifyContent: 'center'  }}>
+            <Text style={styles.miniHeader}>take a guess</Text>
+          </View>
+          <View style={{ flex: 4, justifyContent: 'center' }}>
+            <Image
+              resizeMode='cover'
+              style={styles.img}
+              source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + this.props.route.params.guessObj.image_path}}
+            />
+          </View>
+          <View style={[{ flex: 2 }, styles.answer]}>
             {this.state.answerLetters.map(obj =>
-              <AnswerLetter value={obj.value} key={obj.key} id={obj.key} letterKey={obj.letterKey} letterPressed={this.answerLetterPressed.bind(this)}></AnswerLetter>
+              <AnswerLetter value={obj.value} key={obj.key}
+                            id={obj.key}
+                            letterKey={obj.letterKey}
+                            letterPressed={this.answerLetterPressed.bind(this)} />
             )}
           </View>
-          <View style={styles.letters}>
+          <View style={[{ flex: 2 }, styles.letters]}>
             {this.state.letters.map(obj =>
-              <Letter value={obj.value} key={obj.key} id={obj.key} letterPressed={this.letterPressed.bind(this)}></Letter>
+              <Letter value={obj.value} key={obj.key} id={obj.key} style={styles.letter}
+                      letterPressed={this.letterPressed.bind(this)} />
             )}
           </View>
         </View>
@@ -132,28 +142,30 @@ export default class Guess extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  box: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  btn: {
-    flex: 1
+  miniHeader: {
+    fontSize: 25,
+    textAlign: 'center',
+    fontFamily: 'KBSticktoIt'
   },
   answer: {
-    flex: 2,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 100,
-    marginBottom: 200
+    justifyContent: 'center'
+  },
+  letter: {
+    margin: 2,
   },
   letters: {
-    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center'
   },
   img: {
-    width: 70,
-    height: 70,
-    margin: 1
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    alignSelf: 'center',
   }
 });

@@ -5,7 +5,7 @@ import Letter from './letter';
 import AnswerLetter from './answer_letter';
 import {GetFromStorage, SetToStorage, EditStorage} from '../lib/storageHandler'
 import _ from 'lodash';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { AddCoins } from '../lib/coins'
 
 export default class Guess extends React.Component {
   constructor(props) {
@@ -49,6 +49,19 @@ export default class Guess extends React.Component {
     SetToStorage(key, _.assign(this.props.route.params.guessObj, {state: guessState}));
   }
 
+  verifyGuess() {
+    var answerLetters = '';
+    for (var i = 0; i < this.state.answerLetters.length; i++) {
+      if (!this.state.answerLetters[i].valueSet) {
+        return false;
+      }
+
+      answerLetters += this.state.answerLetters[i].value;
+    }
+
+    return answerLetters == this.props.route.params.guessObj.answer;
+  }
+
   letterPressed(key, value) {
     for (var i = 0; i < this.state.answerLetters.length; i++) {
       if (!this.state.answerLetters[i].valueSet) {
@@ -75,8 +88,21 @@ export default class Guess extends React.Component {
 
     this.setState(guessState);
     var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+    var guessFinished = this.verifyGuess();
 
-    EditStorage(key, {state: guessState});
+    EditStorage(key, {state: guessState, finished: guessFinished});
+
+    if (guessFinished) {
+      AddCoins(10);
+      Alert.alert(
+        'OMG',
+        'Level Finished',
+        [
+          {text: 'OK', onPress: () => this.props.navigator.pop()}
+        ]
+      )
+      
+    }
   }
 
   answerLetterPressed(key, value, letterKey) {

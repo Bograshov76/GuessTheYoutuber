@@ -20,11 +20,11 @@ export default class BgCard extends React.Component {
   async componentDidMount() {
     var storageCoins = await GetCoins();
     this.setState({coins: storageCoins});
-    SubscribeToEvent('change', this.coinsChanged.bind(this));
+    SubscribeToEvent('change', 'BgCard', this.coinsChanged.bind(this));
   }
 
   componentWillUnmount() {
-    UnSubscribeFromEvent('change');
+    UnSubscribeFromEvent('change', 'BgCard');
   }
 
   navigateTo(screen) {

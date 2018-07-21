@@ -19,7 +19,8 @@ export default class LevelsList extends React.Component {
     return fetch(url)
       .then((response) => response.json())
       .then((responseJson) => {
-        this.props.navigator.push('level', {levelObj: responseJson});
+        const { navigate } = this.props.navigation;
+        navigate('Level', { levelObj: responseJson });
       })
       .catch((error) =>{
         console.error(error);
@@ -46,7 +47,7 @@ export default class LevelsList extends React.Component {
 
   render() {
     return (
-        <BgCard navigator={this.props.navigator}>
+        <BgCard navigation={this.props.navigation}>
           <View>
             <ScrollView contentContainerStyle={{ flex: 0 }}>
               {this.state.levels.map(level =>

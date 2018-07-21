@@ -6,8 +6,9 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 
 export default class Level extends React.Component {
   imagePicked(id) {
-    var guessObj = _.find(this.props.route.params.levelObj.contents, {'id': id});
-    this.props.navigator.push('guess', {guessObj: guessObj});
+    const { navigation } = this.props;
+    var guessObj = _.find(navigation.getParam('levelObj').contents, {'id': id});
+    navigation.navigate('Guess', { guessObj: guessObj });
   }
 
   renderChannel(channel) {
@@ -31,12 +32,13 @@ export default class Level extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
-      <BgCard navigator={this.props.navigator}>
+      <BgCard navigation={this.props.navigation}>
         <View style={{flex: 1}}>
           <ScrollView contentContainerStyle={{ flex: 0 }}>
             <Grid>
-              {_.chunk(this.props.route.params.levelObj.contents, 3).map((row, index) =>
+              {_.chunk(navigation.getParam('levelObj').contents, 3).map((row, index) =>
                 this.renderRow(row, index)
               )}
             </Grid>

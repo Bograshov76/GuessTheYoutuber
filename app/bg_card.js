@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { Container, Footer, FooterTab, Button, Text, Badge } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackgroundImage from './background_image';
@@ -27,11 +27,13 @@ export default class BgCard extends React.Component {
     UnSubscribeFromEvent('change', 'BgCard');
   }
 
-  navigateTo(screen) {
-    this.props.navigator.push(screen);
+  navigateTo(screen, navigate) {
+    console.log(screen);
+    navigate(screen);
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{ flex: 1 }}>
         <Container style={{ flex: 1, justifyContent: "center", alignItems: "stretch"}}>
@@ -44,11 +46,11 @@ export default class BgCard extends React.Component {
                 </View>
                 <Footer>
                   <FooterTab style={{ backgroundColor: '#fafafa' }}>
-                    <Button vertical onPress={() => this.navigateTo('home')}>
+                    <Button vertical onPress={this.navigateTo.bind(this, 'Home', navigate)}>
                       <Icon name="home" size={30} />
                     </Button>
-                    <Button vertical onPress={() => this.navigateTo('levels_list')}>
-                      <Icon name="bars" size={30} color={this.props.navigator[0] === 'levels_list' ? '#e6172e' : undefined} />
+                    <Button vertical onPress={this.navigateTo.bind(this, 'LevelsList', navigate)}>
+                      <Icon name="bars" size={30} color={this.props[0] === 'levels_list' ? '#e6172e' : undefined} />
                     </Button>
                     <Button badge vertical>
                       <Badge success style={{ top: 6, left: 13 }}><Text>{this.state.coins}</Text></Badge>

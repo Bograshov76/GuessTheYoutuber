@@ -17,7 +17,9 @@ export default class Guess extends React.Component {
   }
 
   async componentDidMount() {
-    var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+    const { navigation } = this.props;
+    const guessObj = navigation.getParam('guessObj');
+    var key = 'guess:' + guessObj.id.toString();
     var storageGuess = await GetFromStorage(key);
     if (storageGuess) {
       this.setState(storageGuess.state);
@@ -25,9 +27,9 @@ export default class Guess extends React.Component {
     }
     var letters = [];
     var answerLetters = [];
-    for (var i = 0; i < this.props.route.params.guessObj.answer.length; i++) {
+    for (var i = 0; i < guessObj.answer.length; i++) {
       letters.push({
-        value: this.props.route.params.guessObj.answer[i],
+        value: guessObj.answer[i],
         key: i.toString(),
         selected: false
       });
@@ -46,10 +48,13 @@ export default class Guess extends React.Component {
 
     this.setState(guessState);
 
-    SetToStorage(key, _.assign(this.props.route.params.guessObj, {state: guessState}));
+    SetToStorage(key, _.assign(guessObj, {state: guessState}));
   }
 
   verifyGuess() {
+    const { navigation } = this.props;
+    const guessObj = navigation.getParam('guessObj');
+
     var answerLetters = '';
     for (var i = 0; i < this.state.answerLetters.length; i++) {
       if (!this.state.answerLetters[i].valueSet) {
@@ -59,10 +64,13 @@ export default class Guess extends React.Component {
       answerLetters += this.state.answerLetters[i].value;
     }
 
-    return answerLetters == this.props.route.params.guessObj.answer;
+    return answerLetters == guessObj.answer;
   }
 
   letterPressed(key, value) {
+    const { navigation } = this.props;
+    const guessObj = navigation.getParam('guessObj');
+
     for (var i = 0; i < this.state.answerLetters.length; i++) {
       if (!this.state.answerLetters[i].valueSet) {
         this.state.answerLetters[i].value = value;
@@ -87,7 +95,7 @@ export default class Guess extends React.Component {
     };
 
     this.setState(guessState);
-    var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+    var key = 'guess:' + guessObj.id.toString();
     var guessFinished = this.verifyGuess();
 
     EditStorage(key, {state: guessState, finished: guessFinished});
@@ -98,7 +106,7 @@ export default class Guess extends React.Component {
         'OMG',
         'Level Finished',
         [
-          {text: 'OK', onPress: () => this.props.navigator.pop()}
+          {text: 'OK', onPress: () => navigation.goBack()}
         ]
       )
       
@@ -106,6 +114,9 @@ export default class Guess extends React.Component {
   }
 
   answerLetterPressed(key, value, letterKey) {
+    const { navigation } = this.props;
+    const guessObj = navigation.getParam('guessObj');
+
     for (var i = 0; i < this.state.letters.length; i++) {
       if (this.state.letters[i].key === letterKey) {
         this.state.letters[i].value = value;
@@ -128,14 +139,17 @@ export default class Guess extends React.Component {
     };
 
     this.setState(guessState);
-    var key = 'guess:' + this.props.route.params.guessObj.id.toString();
+    var key = 'guess:' + guessObj.id.toString();
 
     EditStorage(key, {state: guessState});
   }
 
   render() {
+    const { navigation } = this.props;
+    const guessObj = navigation.getParam('guessObj');
+
     return (
-      <BgCard navigator={this.props.navigator}>
+      <BgCard navigation={this.props.navigation}>
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <View style={{ flex: 1, justifyContent: 'center'  }}>
             <Text style={styles.miniHeader}>take a guess</Text>
@@ -144,7 +158,7 @@ export default class Guess extends React.Component {
             <Image
               resizeMode='cover'
               style={styles.img}
-              source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + this.props.route.params.guessObj.image_path}}
+              source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + guessObj.image_path}}
             />
           </View>
           <View style={[{ flex: 2 }, styles.answer]}>

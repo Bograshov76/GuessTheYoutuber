@@ -10,10 +10,12 @@ export default class Welcome extends React.Component {
   }
 
   startGame() {
-    this.props.navigator.push('levels_list');
+    const { navigate } = this.props.navigation;
+    navigate('LevelsList', { name: 'Jane' });
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={{flex: 1, justifyContent: "center", alignItems: "stretch" }}>
         <View style={{ flex: 1 }}>

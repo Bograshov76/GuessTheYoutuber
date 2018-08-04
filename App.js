@@ -7,7 +7,7 @@ import BackgroundImage from './app/background_image';
 
 import { Navigation } from 'react-native-navigation';
 import Screens from './screens';
-import BgCard from './app/bg_card';
+import FooterMenu from './app/footer_menu';
 
 import {
   createStackNavigator,
@@ -27,7 +27,7 @@ export default class App extends React.Component {
               </View>
           </BackgroundImage>
           <Footer>
-            <BgCard/>
+            <FooterMenu/>
           </Footer>
         </View>
     );

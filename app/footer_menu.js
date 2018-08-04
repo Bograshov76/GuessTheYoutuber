@@ -6,7 +6,7 @@ import BackgroundImage from './background_image';
 import { GetCoins } from '../lib/coins';
 import { SubscribeToEvent, UnSubscribeFromEvent } from '../lib/events';
 
-export default class BgCard extends React.Component {
+export default class FooterMenu extends React.Component {
   async coinsChanged() {
     var storageCoins = await GetCoins();
     this.setState({coins: storageCoins});
@@ -20,11 +20,11 @@ export default class BgCard extends React.Component {
   async componentDidMount() {
     var storageCoins = await GetCoins();
     this.setState({coins: storageCoins});
-    SubscribeToEvent('change', 'BgCard', this.coinsChanged.bind(this));
+    SubscribeToEvent('change', 'FooterMenu', this.coinsChanged.bind(this));
   }
 
   componentWillUnmount() {
-    UnSubscribeFromEvent('change', 'BgCard');
+    UnSubscribeFromEvent('change', 'FooterMenu');
   }
 
   navigateTo(screen, navigate) {

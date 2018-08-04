@@ -1,17 +1,15 @@
 import React from 'react';
-import { AppRegistr, Alert, View, Text } from 'react-native';
-import { Font, AppLoading } from 'expo';
-import { Container, Footer } from 'native-base';
-import BackgroundImage from './app/background_image';
-
-
-import { Navigation } from 'react-native-navigation';
-import Screens from './screens';
-import FooterMenu from './app/footer_menu';
-
+import { View } from 'react-native';
+import { Footer } from 'native-base';
 import {
   createStackNavigator,
 } from 'react-navigation';
+
+
+import BackgroundImage from './app/background_image';
+import Screens from './screens';
+import FooterMenu from './app/footer_menu';
+
 
 
 const AppNavigation = createStackNavigator(Screens , {cardStyle: {backgroundColor: 'transparent'}});

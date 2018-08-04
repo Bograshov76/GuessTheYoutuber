@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import BackgroundImage from './background_image';
 import { GetCoins } from '../lib/coins';
 import { SubscribeToEvent, UnSubscribeFromEvent } from '../lib/events';
+import { GetNavObject } from '../lib/navigation';
 
 export default class FooterMenu extends React.Component {
   async coinsChanged() {
@@ -27,23 +28,22 @@ export default class FooterMenu extends React.Component {
     UnSubscribeFromEvent('change', 'FooterMenu');
   }
 
-  navigateTo(screen, navigate) {
-    console.log(screen);
-    //navigate(screen);
+  navigateTo(screen) {
+    const navObject = GetNavObject();
+    const { navigate } = navObject;
+    navigate(screen);
   }
 
   render() {
-    //const { navigate } = this.props.navigation;
-    const navigate = 2;
     return (
       <View style={{ flex: 1 }}>
         <Container style={{ flex: 1, justifyContent: "center", alignItems: "stretch"}}>
           <View style={{flex: 1, justifyContent: "flex-end", alignItems: "stretch"}}>
                 <FooterTab style={{ backgroundColor: '#fafafa' }}>
-                  <Button vertical onPress={this.navigateTo.bind(this, 'Home', navigate)}>
+                  <Button vertical onPress={this.navigateTo.bind(this, 'Home')}>
                     <Icon name="home" size={30} />
                   </Button>
-                  <Button vertical onPress={this.navigateTo.bind(this, 'LevelsList', navigate)}>
+                  <Button vertical onPress={this.navigateTo.bind(this, 'LevelsList')}>
                     <Icon name="bars" size={30} color={this.props[0] === 'levels_list' ? '#e6172e' : undefined} />
                   </Button>
                   <Button badge vertical>

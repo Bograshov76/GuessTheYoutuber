@@ -2,11 +2,16 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'native-base';
 import ChangingImage from './changing_image';
+import { SetNavObject } from '../lib/navigation';
 
 export default class Welcome extends React.Component {
   constructor() {
     super();
     this.state = {};
+  }
+
+  componentDidMount() {
+    SetNavObject(this.props.navigation);
   }
 
   startGame() {

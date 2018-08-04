@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'native-base';
 import ChangingImage from './changing_image';
 import { Font, AppLoading } from 'expo';
-import BgCard from '../app/bg_card';
 import Welcome from '../app/welcome';
 
 export default class HomeScreen extends React.Component {
@@ -31,9 +30,7 @@ export default class HomeScreen extends React.Component {
     const { navigate } = this.props.navigation;
 
     return (
-        <BgCard navigation={this.props.navigation}>
-          <Welcome navigation={this.props.navigation} style={{ flex: 1, justifyContent: "center", alignItems: "stretch"}} />
-        </BgCard>
+          <Welcome navigation={this.props.navigation} style={{ flex: 1, justifyContent: "center", alignItems: "stretch", backgroundColor: 'transparent', padding: 10}} />
       )
     
   }

@@ -17,7 +17,7 @@ export default class Welcome extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={{flex: 1, justifyContent: "center", alignItems: "stretch" }}>
+      <View style={{flex: 1, justifyContent: "center", alignItems: "stretch", backgroundColor: 'transparent' }}>
         <View style={{ flex: 1 }}>
         </View>
         <View style={{ flex: 3 }}>

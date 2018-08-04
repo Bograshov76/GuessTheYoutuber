@@ -1,6 +1,5 @@
 import React from 'react';
 import { Alert, StyleSheet, Text, View, Image } from 'react-native';
-import BgCard from './bg_card';
 import Letter from './letter';
 import AnswerLetter from './answer_letter';
 import {GetFromStorage, SetToStorage, EditStorage} from '../lib/storageHandler'
@@ -149,34 +148,32 @@ export default class Guess extends React.Component {
     const guessObj = navigation.getParam('guessObj');
 
     return (
-      <BgCard navigation={this.props.navigation}>
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <View style={{ flex: 1, justifyContent: 'center'  }}>
-            <Text style={styles.miniHeader}>take a guess</Text>
-          </View>
-          <View style={{ flex: 4, justifyContent: 'center' }}>
-            <Image
-              resizeMode='cover'
-              style={styles.img}
-              source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + guessObj.image_path}}
-            />
-          </View>
-          <View style={[{ flex: 2 }, styles.answer]}>
-            {this.state.answerLetters.map(obj =>
-              <AnswerLetter value={obj.value} key={obj.key}
-                            id={obj.key}
-                            letterKey={obj.letterKey}
-                            letterPressed={this.answerLetterPressed.bind(this)} />
-            )}
-          </View>
-          <View style={[{ flex: 2 }, styles.letters]}>
-            {this.state.letters.map(obj =>
-              <Letter value={obj.value} key={obj.key} id={obj.key} style={styles.letter}
-                      letterPressed={this.letterPressed.bind(this)} />
-            )}
-          </View>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center'  }}>
+          <Text style={styles.miniHeader}>take a guess</Text>
         </View>
-      </BgCard>
+        <View style={{ flex: 4, justifyContent: 'center' }}>
+          <Image
+            resizeMode='cover'
+            style={styles.img}
+            source={{uri: 'http://ec2-52-59-249-218.eu-central-1.compute.amazonaws.com:3000/' + guessObj.image_path}}
+          />
+        </View>
+        <View style={[{ flex: 2 }, styles.answer]}>
+          {this.state.answerLetters.map(obj =>
+            <AnswerLetter value={obj.value} key={obj.key}
+                          id={obj.key}
+                          letterKey={obj.letterKey}
+                          letterPressed={this.answerLetterPressed.bind(this)} />
+          )}
+        </View>
+        <View style={[{ flex: 2 }, styles.letters]}>
+          {this.state.letters.map(obj =>
+            <Letter value={obj.value} key={obj.key} id={obj.key} style={styles.letter}
+                    letterPressed={this.letterPressed.bind(this)} />
+          )}
+        </View>
+      </View>
     );
   }
 }

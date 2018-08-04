@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Image, TouchableHighlight } from 'react-native';
 import _ from 'lodash'
-import BgCard from "./bg_card";
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
 export default class Level extends React.Component {
@@ -34,17 +33,15 @@ export default class Level extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      <BgCard navigation={this.props.navigation}>
-        <View style={{flex: 1}}>
-          <ScrollView contentContainerStyle={{ flex: 0 }}>
-            <Grid>
-              {_.chunk(navigation.getParam('levelObj').contents, 3).map((row, index) =>
-                this.renderRow(row, index)
-              )}
-            </Grid>
-          </ScrollView>
-        </View>
-      </BgCard>
+      <View style={{flex: 1}}>
+        <ScrollView contentContainerStyle={{ flex: 0 }}>
+          <Grid>
+            {_.chunk(navigation.getParam('levelObj').contents, 3).map((row, index) =>
+              this.renderRow(row, index)
+            )}
+          </Grid>
+        </ScrollView>
+      </View>
     );
   }
 }

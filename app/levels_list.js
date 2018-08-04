@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import { Button, Text, Icon } from 'native-base';
-import BgCard from './bg_card';
 
 export default class LevelsList extends React.Component {
   constructor() {
@@ -47,19 +46,17 @@ export default class LevelsList extends React.Component {
 
   render() {
     return (
-        <BgCard navigation={this.props.navigation}>
-          <View>
-            <ScrollView contentContainerStyle={{ flex: 0 }}>
-              {this.state.levels.map(level =>
-                <Button key={level.id} iconLeft rounded success style={styles.btn}
-                        onPress={() => this.pickLevel(level.id)}>
-                  <Icon name='star' />
-                  <Text>{level.name}</Text>
-                </Button>
-              )}
-            </ScrollView>
-          </View>
-        </BgCard>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'stretch'}}>
+          <ScrollView contentContainerStyle={{ flex: 0 }}>
+            {this.state.levels.map(level =>
+              <Button key={level.id} iconLeft rounded success style={styles.btn}
+                      onPress={() => this.pickLevel(level.id)}>
+                <Icon name='star' />
+                <Text>{level.name}</Text>
+              </Button>
+            )}
+          </ScrollView>
+        </View>
     );
   }
 }
